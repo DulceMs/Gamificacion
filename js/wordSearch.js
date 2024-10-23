@@ -1,5 +1,8 @@
 // Lista de palabras al azar en español
-const palabras = ["gato", "perro", "casa", "coche", "árbol", "montaña", "sol", "luna", "estrella", "mar", "ventana", "libro", "libreria", "universidad","escuela","colegio","comida"];
+const palabras = ["gato", "perro", "casa", "coche", "árbol", 
+    "montaña", "sol", "luna", "estrella", "mar", "ventana", "libro", 
+    "libreria", "universidad","escuela","colegio","comida",
+    "cangrejo", "jirafa"];
 
 // Función para generar palabras aleatorias
 function generarPalabrasAleatorias(cantidad) {
