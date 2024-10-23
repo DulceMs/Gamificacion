@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #2e2e2e;
+            color: white;
+        }
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Panel de Administrador</h2>
+        
+        <!-- Sección para mostrar usuarios -->
+        <h4>Usuarios Registrados</h4>
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Rol</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                <!-- Los usuarios se agregarán aquí -->
+            </tbody>
+        </table>
+
+        <!-- Formulario para añadir nuevos usuarios -->
+        <h4>Añadir Nuevo Usuario</h4>
+        <form id="addUserForm">
+            <div class="mb-3">
+                <label for="newUsername" class="form-label">Nombre de Usuario</label>
+                <input type="text" class="form-control" id="newUsername" required>
+            </div>
+            <div class="mb-3">
+                <label for="newRole" class="form-label">Rol</label>
+                <select class="form-select" id="newRole" required>
+                    <option value="">Seleccionar rol</option>
+                    <option value="usuario">Usuario Normal</option>
+                    <option value="admin">Administrador</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Añadir Usuario</button>
+        </form>
+    </div>
+
+    <script>
+        const users = [
+            { username: 'user', role: 'Usuario Normal' },
+            { username: 'admin', role: 'Administrador' }
+        ];
+
+        function displayUsers() {
+            const userTableBody = document.getElementById('userTableBody');
+            userTableBody.innerHTML = ''; // Limpiar tabla existente
+
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${user.username}</td><td>${user.role}</td>`;
+                userTableBody.appendChild(row);
+            });
+        }
+
+        document.getElementById('addUserForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const newUsername = document.getElementById('newUsername').value;
+            const newRole = document.getElementById('newRole').value;
+
+            if (newRole === 'usuario') {
+                users.push({ username: newUsername, role: 'Usuario Normal' });
+            } else if (newRole === 'admin') {
+                users.push({ username: newUsername, role: 'Administrador' });
+            }
+
+            // Limpiar el formulario
+            document.getElementById('newUsername').value = '';
+            document.getElementById('newRole').value = '';
+
+            displayUsers(); // Actualizar la lista de usuarios
+        });
+
+        // Inicializar la tabla de usuarios al cargar la página
+        displayUsers();
+    </script>
+</body>
+</html>
