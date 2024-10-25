@@ -21,6 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error al enviar el mensaje. Inténtalo de nuevo más tarde.";
     }
-:
+
 }
 ?>
