@@ -1,10 +1,12 @@
-// Lista de palabras al azar en español
-const palabras = ["gato", "perro", "casa", "coche", "árbol", 
-    "montaña", "sol", "luna", "estrella", "mar", "ventana", "libro", 
-    "libreria", "universidad","escuela","colegio","comida",
-    "cangrejo", "jirafa"];
+const palabras = [
+    "gato", "perro", "casa", "coche", "árbol", "montaña", 
+    "sol", "luna", "estrella", "mar", "ventana", "libro", 
+    "libreria", "universidad", "escuela", "colegio", 
+    "comida", "cangrejo", "jirafa"
+];
 
-// Función para generar palabras aleatorias
+let puntaje = 0;
+
 function generarPalabrasAleatorias(cantidad) {
     let palabrasSeleccionadas = [];
     for (let i = 0; i < cantidad; i++) {
@@ -14,33 +16,46 @@ function generarPalabrasAleatorias(cantidad) {
     return palabrasSeleccionadas;
 }
 
-// Mostrar palabras al azar en la pantalla
-const palabrasAleatorias = generarPalabrasAleatorias(5);
+let palabrasAleatorias = generarPalabrasAleatorias(5);
 document.getElementById('random-words').innerHTML = palabrasAleatorias.join(', ');
 
-// Verificar si las palabras ingresadas coinciden
-document.getElementById('check-btn').addEventListener('click', function() {
+function actualizarPuntaje() {
+    document.getElementById('puntaje').innerText = `Puntaje: ${puntaje}`;
+}
+
+document.getElementById('check-btn').addEventListener('click', function () {
     const inputUsuario = document.getElementById('user-input').value.trim().toLowerCase();
-    const palabrasUsuario = inputUsuario.split(/[\s,]+/); // Separar por espacios o comas
+    const palabrasUsuario = inputUsuario.split(/[\s,]+/);
     const resultado = verificarPalabras(palabrasUsuario, palabrasAleatorias);
 
     if (resultado) {
+        puntaje += 10;
+        actualizarPuntaje();
+        if (puntaje >= 100) {
+            mostrarFelicitaciones(); // Mostrar modal de felicitaciones
+        }
+        palabrasAleatorias = generarPalabrasAleatorias(5);
+        document.getElementById('random-words').innerHTML = palabrasAleatorias.join(', ');
+        document.getElementById('user-input').value = '';
         document.getElementById('result').innerHTML = "<p style='color:green;'>¡Correcto! Todas las palabras son correctas.</p>";
     } else {
         document.getElementById('result').innerHTML = "<p style='color:red;'>Algunas palabras son incorrectas. Inténtalo de nuevo.</p>";
     }
 });
 
-// Función para verificar si las palabras coinciden
 function verificarPalabras(palabrasUsuario, palabrasCorrectas) {
     if (palabrasUsuario.length !== palabrasCorrectas.length) {
         return false;
     }
-
     for (let i = 0; i < palabrasCorrectas.length; i++) {
         if (palabrasUsuario[i] !== palabrasCorrectas[i]) {
             return false;
         }
     }
     return true;
+}
+
+function mostrarFelicitaciones() {
+    const modal = new bootstrap.Modal(document.getElementById('felicitacionesModal'));
+    modal.show();
 }

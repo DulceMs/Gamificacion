@@ -4,7 +4,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = htmlspecialchars($_POST['email']);
     $message = htmlspecialchars($_POST['message']);
 
-
     $to = "dmazariegosm8@miumg.edu.gt";
     $subject = "Nuevo mensaje de contacto";
     $headers = "From: " . $email . "\r\n";
@@ -21,6 +20,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error al enviar el mensaje. Inténtalo de nuevo más tarde.";
     }
-
 }
 ?>

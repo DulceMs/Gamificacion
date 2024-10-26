@@ -16,12 +16,6 @@
       color: rgba(255, 255, 255, 0.9);
     }
 
-    .jumbotron {
-      background-color: #1e90ff;
-      padding: 30px;
-      text-align: center;
-    }
-
     .game-section {
       background-color: #1c1c1c;
       padding: 40px;
@@ -31,11 +25,6 @@
     .game-title {
       color: #87cefa;
       font-size: 28px;
-      margin-bottom: 20px;
-    }
-
-    .game-instructions {
-      color: white;
       margin-bottom: 20px;
     }
 
@@ -63,57 +52,59 @@
       padding: 10px;
       margin-top: 20px;
     }
+    .modal-personalizado {
+      background-color: #1e1e1e; /* Fondo oscuro */
+      color: white; /* Texto claro */
+    }
+
+  .modal-personalizado .modal-header, 
+  .modal-personalizado .modal-footer {
+    border-color: #444; /* Bordes más sutiles */
+  }
+
+  .btn-close {
+    filter: invert(1); /* Cambia el ícono de cierre a blanco */
+  }
   </style>
 </head>
 
 <body>
-  <!-- Navegación -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Gamificando y Aprendiendo</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="lecturarapida.html">Lectura Rápida</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="buscador.html">Búsqueda de Palabras</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="acercade.html">Acerca de</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contacto.html">Contacto</a>
-          </li>
-        </ul>
-      </div>
     </div>
   </nav>
 
-  <!-- Juego de Búsqueda de Palabras -->
   <div class="game-section">
     <h1 class="game-title">Juego de Búsqueda de Palabras</h1>
-    <p class="game-instructions">Escribe las palabras que ves en la lista:</p>
-    <div id="random-words" class="word-list">
-      <!-- Las palabras a buscar aparecerán aquí -->
-    </div>
+    <div id="puntaje" class="mb-3">Puntaje: 0</div>
+    <div id="random-words" class="word-list"></div>
     <textarea class="form-control word-input" id="user-input" placeholder="Escribe aquí las palabras separadas por comas"></textarea>
     <button id="check-btn" class="btn btn-success btn-custom">Enviar</button>
     <p id="result"></p>
   </div>
 
-  <!-- Footer -->
-  <footer>
-    © 2024 Gamificación Educativa
-  </footer>
+  <footer>© 2024 Gamificación Educativa</footer>
 
-  <!-- Cargar el archivo JS externo -->
+ <!-- Modal de Felicitación -->
+<div class="modal fade" id="felicitacionesModal" tabindex="-1" aria-labelledby="felicitacionesModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modal-personalizado">
+      <div class="modal-header">
+        <h5 class="modal-title" id="felicitacionesModalLabel">¡Felicidades!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <p>¡Has alcanzado 100 puntos! Sigue jugando para mejorar tus habilidades.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
   <script src="js/wordSearch.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
