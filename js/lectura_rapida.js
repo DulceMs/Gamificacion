@@ -28,10 +28,11 @@ async function fetchWithRetry(url, retries = 3, delay = 1000) {
 // Obtener texto con manejo de errores
 async function obtenerTexto() {
     try {
+        //api de google 
         const response = await fetchWithRetry('https://www.googleapis.com/books/v1/volumes?q=language:es&maxResults=40');
 
         const data = await response.json();
-
+        //sino encontro libros mostrara el error
         if (!data.items || data.items.length === 0) {
             throw new Error('No se encontraron libros disponibles.');
         }
