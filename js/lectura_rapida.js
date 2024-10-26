@@ -7,6 +7,7 @@ document.getElementById('iniciar').addEventListener('click', iniciarLectura);
 document.getElementById('parar').addEventListener('click', pararLectura);
 document.getElementById('aumentar').addEventListener('click', aumentarVelocidad);
 document.getElementById('reiniciar').addEventListener('click', reiniciarJuego);
+document.getElementById('usarTexto').addEventListener('click', usarTextoIngresado);
 
 // Función con reintento para manejar límite de peticiones (error 429)
 async function fetchWithRetry(url, retries = 3, delay = 1000) {
@@ -70,6 +71,32 @@ async function iniciarLectura() {
     }, velocidad);
 }
 
+// Usar texto ingresado en el cuadro de texto
+function usarTextoIngresado() {
+    clearInterval(intervalo);
+    const texto = document.getElementById('inputTexto').value;
+
+    if (texto.trim() === '') {
+        document.getElementById('texto').innerText = 'Por favor, ingresa un texto.';
+        return;
+    }
+
+    const palabras = texto.split(' ');
+    palabrasLeidas = 0;
+    tiempoInicio = Date.now();
+    let indice = 0;
+
+    intervalo = setInterval(() => {
+        if (indice < palabras.length) {
+            document.getElementById('texto').innerHTML = palabras[indice++];
+            palabrasLeidas++;
+        } else {
+            clearInterval(intervalo);
+            mostrarResultado();
+        }
+    }, velocidad);
+}
+
 function pararLectura() {
     clearInterval(intervalo);
     mostrarResultado();
@@ -85,6 +112,7 @@ function reiniciarJuego() {
     document.getElementById('resultado').innerText = '';
     palabrasLeidas = 0;
     velocidad = 200;
+    document.getElementById('inputTexto').value = ''; // Limpiar el cuadro de texto
 }
 
 function mostrarResultado() {
