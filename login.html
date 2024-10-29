@@ -53,7 +53,13 @@
                 document.getElementById('roleMessage').innerText = 'Rol: Usuario Normal';
                 // Mostrar botones para acceder a los juegos
                 document.getElementById('actionButtons').style.display = 'block';
-            } else {
+            } else if (username === 'dulce' && password === 'dulce123')
+            {
+                document.getElementById('roleMessage').innerText = 'Rol: Usuario Normal';
+                // Mostrar botones para acceder a los juegos
+                document.getElementById('actionButtons').style.display = 'block';
+            }
+             else {
                 alert('Credenciales incorrectas. Inténtalo de nuevo.');
             }
         });

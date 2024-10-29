@@ -41,6 +41,10 @@
                 <input type="text" class="form-control" id="newUsername" required>
             </div>
             <div class="mb-3">
+                <label for="newPassword" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="newPassword" required>
+            </div>
+            <div class="mb-3">
                 <label for="newRole" class="form-label">Rol</label>
                 <select class="form-select" id="newRole" required>
                     <option value="">Seleccionar rol</option>
@@ -54,9 +58,9 @@
 
     <script>
         const users = [
-            { username: 'user', role: 'Usuario Normal' },
-            { username: 'admin', role: 'Administrador' },
-            { username: 'dulce', role: 'Usuario Normal'}
+            { username: 'user', role: 'Usuario Normal', password: 'user123' },
+            { username: 'admin', role: 'Administrador', password: 'admin123' },
+            { username: 'dulce', role: 'Usuario Normal', password: 'dulce123' }
         ];
 
         function displayUsers() {
@@ -74,16 +78,18 @@
             event.preventDefault();
 
             const newUsername = document.getElementById('newUsername').value;
+            const newPassword = document.getElementById('newPassword').value;
             const newRole = document.getElementById('newRole').value;
 
             if (newRole === 'usuario') {
-                users.push({ username: newUsername, role: 'Usuario Normal' });
+                users.push({ username: newUsername, role: 'Usuario Normal', password: newPassword });
             } else if (newRole === 'admin') {
-                users.push({ username: newUsername, role: 'Administrador' });
+                users.push({ username: newUsername, role: 'Administrador', password: newPassword });
             }
 
             // Limpiar el formulario
             document.getElementById('newUsername').value = '';
+            document.getElementById('newPassword').value = '';
             document.getElementById('newRole').value = '';
 
             displayUsers(); // Actualizar la lista de usuarios
