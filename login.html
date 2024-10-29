@@ -38,6 +38,9 @@
     </div>
 
     <script>
+        let attempts = 0; // Contador de intentos de inicio de sesión
+        const maxAttempts = 10; // Número máximo de intentos
+
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -45,22 +48,34 @@
             const password = document.getElementById('password').value;
 
             // Simulación de verificación de usuario
-            if (username === 'admin' && password === 'admin123') {
-                document.getElementById('roleMessage').innerText = 'Rol: Administrador';
-                // Redirigir a la página del administrador
-                window.location.href = 'admin.html';
-            } else if (username === 'user' && password === 'user123') {
-                document.getElementById('roleMessage').innerText = 'Rol: Usuario Normal';
-                // Mostrar botones para acceder a los juegos
-                document.getElementById('actionButtons').style.display = 'block';
-            } else if (username === 'dulce' && password === 'dulce123')
-            {
-                document.getElementById('roleMessage').innerText = 'Rol: Usuario Normal';
-                // Mostrar botones para acceder a los juegos
-                document.getElementById('actionButtons').style.display = 'block';
-            }
-             else {
-                alert('Credenciales incorrectas. Inténtalo de nuevo.');
+            if (attempts < maxAttempts) {
+                if (username === 'admin' && password === 'admin123') {
+                    document.getElementById('roleMessage').innerText = 'Rol: Administrador';
+                    // Redirigir a la página del administrador
+                    window.location.href = 'admin.html';
+                } else if (username === 'user' && password === 'user123') {
+                    document.getElementById('roleMessage').innerText = 'Rol: Usuario Normal';
+                    // Mostrar botones para acceder a los juegos
+                    document.getElementById('actionButtons').style.display = 'block';
+                } else if (username === 'dulce' && password === 'dulce123') {
+                    document.getElementById('roleMessage').innerText = 'Rol: Usuario Normal';
+                    // Mostrar botones para acceder a los juegos
+                    document.getElementById('actionButtons').style.display = 'block';
+                } else {
+                    attempts++; // Incrementar el contador de intentos
+                    alert('Credenciales incorrectas. Inténtalo de nuevo. Intentos restantes: ' + (maxAttempts - attempts));
+                    
+                    if (attempts >= maxAttempts) {
+                        alert('Número máximo de intentos alcanzado. Acceso bloqueado.');
+                        document.getElementById('loginForm').reset(); // Opcional: restablecer el formulario
+                        // Deshabilitar el formulario
+                        document.getElementById('loginForm').querySelectorAll('input, button').forEach(element => {
+                            element.disabled = true;
+                        });
+                    }
+                }
+            } else {
+                alert('Número máximo de intentos alcanzado. Acceso bloqueado.');
             }
         });
 
